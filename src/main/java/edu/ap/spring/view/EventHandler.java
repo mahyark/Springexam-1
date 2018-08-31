@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,12 +60,26 @@ public class EventHandler {
     public void whenBtnGetAllQuotes_click(ActionEvent actionEvent) {
         //System.out.println("Find all: ") ;
     	final StringBuilder output = new StringBuilder();
-        repository.findAll().forEach(quote -> output.append(quote + "\n"));
+        repository.findAll().forEach(quote -> output.append(quote.getQuoteDescription() + "\n"));
         JOptionPane.showMessageDialog(null, output);
     }
 
     public void whenBtnGetByKeyword_click(ActionEvent actionEvent) {
-        //System.out.println("Find all: ") ;
-        repository.findAll().forEach(System.out::println);    	
+    	final StringBuilder output = new StringBuilder();
+		String keyword = ui.getKeyword().getText();
+		
+        repository.findAll().forEach(quote -> quote.getQuoteDescription().contains(keyword));   
+        for (Quote q : repository.findAll()) {
+        	if (q.getQuoteDescription().contains(keyword)) {
+                output.append(q.getQuoteDescription() + "\n");
+			}
+        }
+        
+        if (output.length() < 0) {
+            JOptionPane.showMessageDialog(null, "No quote found!");
+		}
+        else {
+            JOptionPane.showMessageDialog(null, output);
+        }
     }
 }

@@ -77,10 +77,11 @@ public class UI implements InitializingBean {
     public JFrame getjFrame() {
         return this.jFrame;
     }
-    
-    public JButton getButton() {
-        return btnGetQuotes;
-    }
+
+	public JTextField getKeyword() {
+		// TODO Auto-generated method stub
+		return this.keyword;
+	}
     
 	@Override
 	public void afterPropertiesSet() throws Exception {
