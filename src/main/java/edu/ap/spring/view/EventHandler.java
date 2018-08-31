@@ -36,7 +36,6 @@ public class EventHandler {
 
         try {
 			List<String> quotes = Files.lines(Paths.get(fileName))
-											.filter(line -> !line.startsWith(" "))
 											.collect(Collectors.toList());
 
 			String tmp = "";
