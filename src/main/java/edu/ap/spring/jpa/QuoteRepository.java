@@ -11,7 +11,7 @@ public interface QuoteRepository extends CrudRepository<Quote, Long> {
 	// find all Quotes
 	List<Quote> findAll();
 	
-	// find by tagname
-	List<Quote> findByTagName(String tagName);
+	// find by quoteDescription
+	List<Quote> findByQuoteDescription(String quoteDesc);
 }
 

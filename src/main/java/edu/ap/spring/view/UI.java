@@ -14,6 +14,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class UI implements InitializingBean {
 
@@ -21,8 +22,12 @@ public class UI implements InitializingBean {
 	EventHandler eventHandler;
 
 	private JFrame jFrame;
+	private JLabel label1, label2;
+	private JTextField keyword;
 	private JPanel controlPanel;
-    private JButton btnAddUser;
+    private JButton btnGetQuotes;
+    private JButton btnGetByKeyword;
+    private JButton btnGetAllQuotes;
     
     public UI() {}
     
@@ -31,18 +36,38 @@ public class UI implements InitializingBean {
     	jFrame.setLayout(new FlowLayout());
 	    	
     	controlPanel = new JPanel();
-	    controlPanel.setLayout(new GridLayout(3, 2));
+	    controlPanel.setLayout(new GridLayout(6, 5));
+	    
+		btnGetQuotes = new JButton();
+		btnGetQuotes.setText("Get quotes from file");
+		btnGetQuotes.setTransferHandler(new TransferHandler("text"));
+		btnGetQuotes.addActionListener(eventHandler::whenBtnQuotes_click);
+	    
+		btnGetAllQuotes = new JButton();
+		btnGetAllQuotes.setText("Get all quotes");
+		btnGetAllQuotes.setTransferHandler(new TransferHandler("text"));
+		btnGetAllQuotes.addActionListener(eventHandler::whenBtnGetAllQuotes_click);
+	    
+		btnGetByKeyword = new JButton();
+		btnGetByKeyword.setText("Get quote by keyword");
+		btnGetByKeyword.setTransferHandler(new TransferHandler("text"));
+		btnGetByKeyword.addActionListener(eventHandler::whenBtnGetByKeyword_click);
+
+		label1 = new JLabel("Search for a quote by a word it contains.");
+		label2 = new JLabel("Keyword: ");
+		keyword = new JTextField(30);
+		keyword.setDragEnabled(true);
 		
-		btnAddUser = new JButton();
-		btnAddUser.setText("Get quotes");
-		btnAddUser.setTransferHandler(new TransferHandler("text"));
-		btnAddUser.addActionListener(eventHandler::whenBtnQuotes_click);
-
-		controlPanel.add(btnAddUser);
-
+		controlPanel.add(btnGetQuotes);
+		controlPanel.add(btnGetAllQuotes);
+		
+		controlPanel.add(label1);
+		controlPanel.add(label2);
+		controlPanel.add(keyword);
+		controlPanel.add(btnGetByKeyword);
 		jFrame.add(controlPanel);
 		        
-		jFrame.setSize(800, 800);
+		jFrame.setSize(400, 400);
 		jFrame.setLocationRelativeTo(null);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jFrame.pack();
@@ -54,9 +79,9 @@ public class UI implements InitializingBean {
     }
     
     public JButton getButton() {
-        return btnAddUser;
+        return btnGetQuotes;
     }
-	
+    
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		System.setProperty("java.awt.headless", "false");

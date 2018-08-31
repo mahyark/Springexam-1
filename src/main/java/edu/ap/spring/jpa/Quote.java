@@ -14,9 +14,6 @@ public class Quote {
 
     @Column
     private String quoteDescription;
-    
-    @Column
-    private String tagName;
 
 	public Quote() {}
 	
@@ -31,17 +28,9 @@ public class Quote {
 	public void setQuoteDescription(String quoteDescription) {
 		this.quoteDescription = quoteDescription;
 	}
-
-	public String getTagName() {
-		return tagName;
-	}
-
-	public void setTagName(String tagName) {
-		this.tagName = quoteDescription;
-	}
 	   
     @Override
     public String toString() {
-        return "Quote{Description: " + this.quoteDescription + ", Tag: " + this.tagName + "}";
+        return "Quote{Description: " + this.quoteDescription + "}";
     } 
 }

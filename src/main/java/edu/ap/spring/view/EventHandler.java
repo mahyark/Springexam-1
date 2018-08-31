@@ -7,12 +7,12 @@ import edu.ap.spring.jpa.QuoteRepository;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.swing.JOptionPane;
 
 @Service
 public class EventHandler {
@@ -54,8 +54,17 @@ public class EventHandler {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
 
-        System.out.println("Find all: ") ;
-        repository.findAll().forEach(System.out::println);
+    public void whenBtnGetAllQuotes_click(ActionEvent actionEvent) {
+        //System.out.println("Find all: ") ;
+    	final StringBuilder output = new StringBuilder();
+        repository.findAll().forEach(quote -> output.append(quote + "\n"));
+        JOptionPane.showMessageDialog(null, output);
+    }
+
+    public void whenBtnGetByKeyword_click(ActionEvent actionEvent) {
+        //System.out.println("Find all: ") ;
+        repository.findAll().forEach(System.out::println);    	
     }
 }
