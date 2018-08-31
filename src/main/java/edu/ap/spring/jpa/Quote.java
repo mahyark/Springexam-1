@@ -20,9 +20,8 @@ public class Quote {
 
 	public Quote() {}
 	
-    public Quote(String quoteDesc, String tag) {
+    public Quote(String quoteDesc) {
 	    this.quoteDescription = quoteDesc;
-	    this.tagName = tag;
     }
 
 	public String getQuoteDescription() {
